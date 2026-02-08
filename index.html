@@ -1,17 +1,48 @@
-<script>
-    function openSite() {
-        let url = document.getElementById('url-input').value;
-        
-        // Basic check to ensure the URL is valid
-        if (!url.startsWith('http')) {
-            url = 'https://' + url;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Portal_v1</div>
+        <div class="search-container">
+            <input type="text" id="url-input" placeholder="Enter site address...">
+            <button onclick="openInNewWindow()">Launch Site</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="welcome-screen">
+            <h2>Quick Links</h2>
+            <div class="favorites-grid">
+                <button class="fav-card" onclick="quickLaunch('https://www.bing.com')">Bing</button>
+                <button class="fav-card" onclick="quickLaunch('https://www.wikipedia.org')">Wikipedia</button>
+                <button class="fav-card" onclick="quickLaunch('https://www.xbox.com/play')">Cloud Gaming</button>
+            </div>
+            <p style="margin-top: 20px; color: #666;">Note: Sites open in a new tab to prevent "Refused to Connect" errors.</p>
+        </div>
+    </div>
+
+    <script>
+        // Function for the search bar
+        function openInNewWindow() {
+            let url = document.getElementById('url-input').value;
+            if (!url) return;
+            if (!url.startsWith('http')) {
+                url = 'https://' + url;
+            }
+            window.open(url, '_blank');
         }
 
-        // Using window.open bypasses the Iframe "Refused to Connect" error
-        const newWindow = window.open(url, '_blank');
-        
-        if (!newWindow) {
-            alert("Please allow popups for this website to work!");
+        // Function for the favorite buttons
+        function quickLaunch(url) {
+            window.open(url, '_blank');
         }
-    }
-</script>
+    </script>
+</body>
+</html>
